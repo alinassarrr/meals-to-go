@@ -1,5 +1,5 @@
 import React from "react";
-import { Text } from "react-native"; // Add this import
+import { Text, View } from "react-native"; // Add this import
 import { Card } from "react-native-paper";
 import styled from "styled-components/native";
 import Lottie from "lottie-react-native";
@@ -68,6 +68,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
     address = "Nabae Anjar",
     isOpenNow = true,
     rating = 4,
+    isClosedTemporarily = false,
   } = restaurant;
 
   const ratingArray = Array.from(new Array(Math.floor(rating)));
@@ -75,13 +76,20 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
   const iconName = icon === "restaurant" ? "restaurant" : "cafe";
 
   return (
-    <RestaurantCard elevation={5}>
+    <RestaurantCard>
       <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
       <Info>
         <Row2>
-          <Title>{name}</Title>
-          {isOpenNow && <Status isOpen={isOpenNow}>Open Now</Status>}
-          {!isOpenNow && <Status isOpen={isOpenNow}>Closed</Status>}
+          <View style={{ width: "60%" }}>
+            <Title>{name}</Title>
+          </View>
+          {isClosedTemporarily ? (
+            <Status style={{ color: "red" }}>Closed Temporarily</Status>
+          ) : isOpenNow ? (
+            <Status isOpen={isOpenNow}>Open Now</Status>
+          ) : (
+            <Status isOpen={isOpenNow}>Closed</Status>
+          )}
         </Row2>
         <StarRow>
           {ratingArray.map((_, index) => (
@@ -90,7 +98,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
         </StarRow>
         <Row2>
           <Address>{address}</Address>
-          <Type name={iconName} size={24} color="black" />
+          <Type name={iconName} size={24} color="tomato" />
         </Row2>
       </Info>
     </RestaurantCard>
