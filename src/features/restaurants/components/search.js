@@ -7,7 +7,7 @@ const SearchContainer = styled.View`
   padding: ${(props) => props.theme.space[3]};
   /* background-color: ${(props) => props.theme.colors.bg.primary}; */
 `;
-export const Search = () => {
+export const Search = ({ isFavToggled, onFavToggle }) => {
   const { keyword, search } = useContext(LocationContext);
   const [searchKeyword, setSearchKeyword] = useState(keyword);
 
@@ -25,6 +25,8 @@ export const Search = () => {
           backgroundColor: "tomato",
         }}
         iconColor="#fff"
+        icon={isFavToggled ? "heart" : "heart-outline"}
+        onIconPress={onFavToggle}
         placeholderTextColor="#fff"
         value={searchKeyword}
         onSubmitEditing={() => {

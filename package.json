@@ -13,6 +13,7 @@
     "@expo-google-fonts/inter": "^0.2.3",
     "@expo-google-fonts/lato": "^0.2.3",
     "@expo-google-fonts/oswald": "^0.2.3",
+    "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-community/masked-view": "^0.1.11",
     "@react-navigation/bottom-tabs": "^6.6.1",
     "@react-navigation/native": "^6.1.18",
@@ -35,6 +36,7 @@
     "react-native-svg": "15.2.0",
     "react-native-svg-transformer": "^1.5.0",
     "react-native-vector-icons": "^10.1.0",
+    "react-native-webview": "13.8.6",
     "styled-components": "^6.1.12"
   },
   "devDependencies": {

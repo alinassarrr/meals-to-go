@@ -10,6 +10,7 @@ import { restaurantRequest } from "./src/services/restaurants/restaurants.servic
 import { RestaurantContextProvider } from "./src/services/restaurants/restaurants.context";
 import { LocationContextProvider } from "./src/services/location/location.context";
 import { Navigation } from "./src/infrastructure/navigation/app.navigator";
+import { FavoritesContextProvider } from "./src/services/favorites/favorites.context";
 
 const Tab = createBottomTabNavigator();
 
@@ -23,11 +24,13 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <LocationContextProvider>
-        <RestaurantContextProvider>
-          <Navigation />
-        </RestaurantContextProvider>
-      </LocationContextProvider>
+      <FavoritesContextProvider>
+        <LocationContextProvider>
+          <RestaurantContextProvider>
+            <Navigation />
+          </RestaurantContextProvider>
+        </LocationContextProvider>
+      </FavoritesContextProvider>
     </ThemeProvider>
   );
 }

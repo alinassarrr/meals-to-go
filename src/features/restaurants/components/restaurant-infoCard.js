@@ -1,10 +1,11 @@
 import React from "react";
-import { Text, View } from "react-native"; // Add this import
+import { Text, View } from "react-native"; 
 import { Card } from "react-native-paper";
 import styled from "styled-components/native";
 import Lottie from "lottie-react-native";
 import Octicons from "react-native-vector-icons/Octicons";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { Favorite } from "../../../components/favorites/favorite";
 
 const RestaurantCard = styled(Card)`
   background-color: ${(props) => props.theme.colors.bg.primary};
@@ -77,6 +78,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
 
   return (
     <RestaurantCard>
+      <Favorite restaurant={restaurant} />
       <RestaurantCardCover key={name} source={{ uri: photos[0] }} />
       <Info>
         <Row2>

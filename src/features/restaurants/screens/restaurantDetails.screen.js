@@ -48,7 +48,7 @@ export const RestaurantDetails = ({ route, navigation }) => {
               expanded={breakfastExpanded}
               onPress={() => setBreakfastExpanded(!breakfastExpanded)}
             >
-              <View style={{ backgroundColor: "white" }}>
+              <View style={{ backgroundColor: "#fff" }}>
                 <StyledItem title="Pancakes" />
                 <StyledItem title="Backed Eggs" />
               </View>

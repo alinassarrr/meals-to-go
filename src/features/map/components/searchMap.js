@@ -19,10 +19,6 @@ export const Search = () => {
     setSearchKeyword(keyword);
   }, [keyword]);
 
-  //   useEffect(() => {
-  //     search(searchKeyword);
-  //   }, []);
-
   return (
     <SearchContainer>
       <Searchbar

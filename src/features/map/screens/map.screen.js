@@ -1,19 +1,64 @@
-import MapView from "react-native-maps";
-import React from "react";
+import MapView, { Callout, Marker } from "react-native-maps";
+import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import styled from "styled-components";
 import { Search } from "../components/searchMap";
+import { LocationContext } from "../../../services/location/location.context";
+import { RestaurantContext } from "../../../services/restaurants/restaurants.context";
+import { MapCallout } from "../components/mapCallout";
 
 const Map = styled(MapView)`
   height: 100%;
   width: 100%;
 `;
 
-export const MapScreen = () => {
+export const MapScreen = ({ navigation }) => {
+  const { location } = useContext(LocationContext);
+  const { restaurants = [] } = useContext(RestaurantContext);
+  const [latDelta, setLatDelta] = useState(0);
+
+  const { lat, lng, viewport } = location;
+
+  useEffect(() => {
+    const northeastLat = viewport.northeast.lat;
+    const southwestLat = viewport.southwest.lat;
+
+    const latDelta = northeastLat - southwestLat;
+
+    setLatDelta(latDelta);
+  }, [location, viewport]);
   return (
     <View style={{ flex: 1 }}>
       <Search />
-      <Map />
+      <Map
+        region={{
+          latitude: lat,
+          longitude: lng,
+          latitudeDelta: latDelta,
+          longitudeDelta: 0.03, //zoom condition
+        }}
+      >
+        {restaurants.map((restaurant) => {
+          return (
+            <Marker
+              key={restaurant.name}
+              title={restaurant.name}
+              coordinate={{
+                latitude: restaurant.geometry.location.lat,
+                longitude: restaurant.geometry.location.lng,
+              }}
+            >
+              <Callout
+                onPress={() => {
+                  navigation.navigate("RestaurantDetail", { restaurant });
+                }}
+              >
+                <MapCallout restaurant={restaurant}></MapCallout>
+              </Callout>
+            </Marker>
+          );
+        })}
+      </Map>
     </View>
   );
 };
